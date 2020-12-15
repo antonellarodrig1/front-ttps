@@ -1,7 +1,7 @@
 <template>
   <div class="vue-tempalte" >
         <form @submit.prevent="login" class="border p-3 form">
-           <p class="h3 text-center mb-4">ControlCovid</p>
+           <p class="parrafo h3 text-center mb-4">ControlCovid</p>
             <div  class="form-group">
                 <input type="text" v-model="username" placeholder="Nombre de usuario" class="form-control form-control-lg" required>
             </div>
@@ -44,7 +44,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
-p {
+.parrafo{
     font-family: 'Dancing Script', cursive;
 }
 * {
