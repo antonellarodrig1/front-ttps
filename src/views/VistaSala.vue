@@ -1,0 +1,98 @@
+<template>
+  <div>
+    <Header></Header>
+    <NavbarPerfil></NavbarPerfil>
+    <div>    
+      <b-card>
+        <template #header>
+         <h4 class="mb-0">{{ nombre }}</h4>
+        </template>
+        <b-list-group flush>
+            <b-list-group-item><b>Cantidad de camas: </b>{{ total }}</b-list-group-item>
+            <b-list-group-item><b>Camas disponibles: </b>{{ libres }}</b-list-group-item>
+            <b-list-group-item><b>Camas ocupadas: </b>{{ ocupadas }}</b-list-group-item>
+        </b-list-group>
+        <div>
+        <b-card no-body class="text-center">
+            <div class="bg-secondary text-light">Camas de la sala {{ nombre }}
+            </div>
+         </b-card>
+    </div>
+        <div>
+            <div v-for="cama in camas"  v-bind:my="cama" v-bind:key="cama.idcama">
+                <CardCama :cama="cama"></CardCama>
+            </div>
+        </div>
+  </b-card>
+    </div>
+  </div>
+</template>
+
+<script>
+import NavbarPerfil from '../components/NavbarPerfil'
+import Header from '../components/Header'
+import CardCama from '../components/CardCama'
+import axios from 'axios';
+export default {
+  name: 'Sala',
+  components: {
+    NavbarPerfil,
+    Header,
+    CardCama
+  },
+  data () {
+    return {
+      nombre: "",
+      total: "",
+      ocupadas: "",
+      libres: "",
+      camas:""
+    }
+  },
+  mounted () {
+    axios
+      .get('https://api-ttps.herokuapp.com/sala/'+ this.$route.params.id, {headers: { "user_token": sessionStorage.token }})
+      .then(response => {
+        this.nombre = response.data.nombresala
+      })
+      .catch(error => {
+        console.log(error)
+    });
+     axios
+      .get('https://api-ttps.herokuapp.com/camas/'+ this.$route.params.id, {headers: { "user_token": sessionStorage.token }})
+      .then(response => {
+        this.camas = response.data
+      })
+      .catch(error => {
+        console.log(error)
+    });
+    axios
+      .get('https://api-ttps.herokuapp.com/camassala/'+ this.$route.params.id, {headers: { "user_token": sessionStorage.token }})
+      .then(response => {
+        this.total = response.data.camastotales
+      })
+      .catch(error => {
+        console.log(error)
+    });
+    axios
+      .get('https://api-ttps.herokuapp.com/camasocupadassala/'+ this.$route.params.id, {headers: { "user_token": sessionStorage.token }})
+      .then(response => {
+        this.ocupadas = response.data.ocupadas
+        this.libres = this.total - this.ocupadas
+      })
+      .catch(error => {
+        console.log(error)
+    });
+  }
+}
+</script>
+
+<style>
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+</style>
