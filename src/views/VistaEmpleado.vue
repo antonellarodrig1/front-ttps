@@ -12,7 +12,7 @@
           <b-list-group-item><b>Legajo:</b> {{ legajo }}</b-list-group-item>
           <b-list-group-item><b>DNI:</b> {{ dni }}</b-list-group-item>
           <b-list-group-item><b>Domicilio:</b> {{ domicilio }}</b-list-group-item>
-          <b-list-group-item><b>Fecha de nacimiento:</b> {{ fechanac }}</b-list-group-item>
+          <b-list-group-item><b>Fecha de nacimiento:</b> {{ fechanac.slice(0, -14) }}</b-list-group-item>
           <b-list-group-item><b>Teléfono:</b> {{ telefono }}</b-list-group-item>
           <b-list-group-item><b>Email:</b> {{ email }}</b-list-group-item>
         </b-list-group>
