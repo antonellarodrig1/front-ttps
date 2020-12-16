@@ -69,12 +69,8 @@ export default {
     axios
       .get('https://api-ttps.herokuapp.com/camassala/'+ this.$route.params.id, {headers: { "user_token": sessionStorage.token }})
       .then(response => {
-        this.total = response.data.camastotales
-      })
-      .catch(error => {
-        console.log(error)
-    });
-    axios
+        this.total = response.data.camastotales,
+        axios
       .get('https://api-ttps.herokuapp.com/camasocupadassala/'+ this.$route.params.id, {headers: { "user_token": sessionStorage.token }})
       .then(response => {
         this.ocupadas = response.data.ocupadas
@@ -83,6 +79,11 @@ export default {
       .catch(error => {
         console.log(error)
     });
+      })
+      .catch(error => {
+        console.log(error)
+    });
+    
   }
 }
 </script>
