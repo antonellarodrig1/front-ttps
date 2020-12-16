@@ -217,7 +217,7 @@ export default {
         .catch(error => {
           if (id === 3){
             axios
-            .post('https://api-ttps.herokuapp.com/cambiarsistema', {idsistema: 1, idpaciente: this.$route.params.id},{headers: { "user_token": sessionStorage.token }})
+            .post('https://api-ttps.herokuapp.com/cambiarsistema', {idsistemaactual: this.idsistema, idsistema: 1, idpaciente: this.$route.params.id},{headers: { "user_token": sessionStorage.token }})
             .then(response => {
                this.cambiouti = true;
                this.cama= response.data.numerocama;
