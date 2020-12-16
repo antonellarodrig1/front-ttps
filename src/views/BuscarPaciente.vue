@@ -86,7 +86,7 @@ export default {
     allPacientes() {
       axios
       .get('https://api-ttps.herokuapp.com/pacientes', {headers: { "user_token": sessionStorage.token }})
-      .then(response => (this.pacientes = response.data))
+      .then(response => {this.pacientes = response.data})
       .catch(error => {
         this.errpacientes= true;
       })
